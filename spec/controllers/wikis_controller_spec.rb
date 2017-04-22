@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe WikisController, type: :controller do
-  let(:my_wiki) { Wiki.create!(title: "New Wiki Title", body: "New Wiki Body", private: false) }
+  let(:my_wiki) { Wiki.create!(title: "New Wiki Title", body: "New Wiki Body") }
 
   describe "GET index" do
     it "returns http success" do
@@ -34,16 +34,16 @@ RSpec.describe WikisController, type: :controller do
 
     describe "POST create" do
       it "increases the number of wikis by 1" do
-        expect{ post :create, wiki: {title: "New Wiki Title", body: "New Wiki body"} }.to change(Wiki,:count).by(1)
+        expect( post :create, wiki: {title: "New Wiki Title", body: "New Wiki body"} ).to change(Wiki,:count).by(1)
       end
 
       it "assigns Wiki.last to @wiki" do
-        post :create, wiki: {title: "New Wiki Title", body: "New Wiki body"} }.to change(Wiki,:count)
+        post( :create, wiki: {title: "New Wiki Title", body: "New Wiki body"} ).to change(Wiki,:count)
         expect(assigns(:wiki)).to eq Wiki.last
       end
 
       it "redirects to the new wiki" do
-        post :create, wiki: {title: "New Wiki Title", body: "New Wiki body"} }.to change(Wiki,:count)
+        post( :create, wiki: {title: "New Wiki Title", body: "New Wiki body"} ).to change(Wiki,:count)
         expect(response).to redirect_to Wiki.last
       end
     end

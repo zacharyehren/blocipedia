@@ -1,4 +1,5 @@
 class WikisController < ApplicationController
+  before_action :require_sign_in, except: [:index, :show]
 
   def index
     @wikis = Wiki.all
@@ -54,5 +55,5 @@ class WikisController < ApplicationController
       flash.now[:alert] = "There was an error deleting the Wiki."
       render :show
     end
-  end     
+  end
 end

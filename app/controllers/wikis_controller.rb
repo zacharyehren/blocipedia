@@ -1,5 +1,4 @@
 class WikisController < ApplicationController
-  before_action :require_sign_in, except: [:index, :show]
 
   def index
     @wikis = Wiki.all
@@ -36,12 +35,18 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
 
-    if @wiki.save
-      flash[:notice] = "Wiki was updated."
+    authorize @wiki
+    if @wiki.update(unauthorized)
+      flash.now[:alert] = "You are not authorized to do that."
       redirect_to @wiki
     else
-      flash.now[:alert] = "There was an error saving the Wiki. Please try again."
-      render :edit
+      if @wiki.save
+        flash[:notice] = "Wiki was updated."
+        redirect_to @wiki
+      else
+        flash.now[:alert] = "There was an error saving the Wiki. Please try again."
+        render :edit
+      end
     end
   end
 

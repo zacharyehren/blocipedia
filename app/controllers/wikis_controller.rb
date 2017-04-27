@@ -35,11 +35,8 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
 
-    authorize @wiki
-    if @wiki.update(unauthorized)
-      flash.now[:alert] = "You are not authorized to do that."
-      redirect_to @wiki
-    else
+    authorize @wiki 
+
       if @wiki.save
         flash[:notice] = "Wiki was updated."
         redirect_to @wiki
@@ -47,7 +44,6 @@ class WikisController < ApplicationController
         flash.now[:alert] = "There was an error saving the Wiki. Please try again."
         render :edit
       end
-    end
   end
 
   def destroy

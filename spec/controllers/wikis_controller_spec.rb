@@ -6,7 +6,7 @@ RSpec.describe WikisController, type: :controller do
 
 context "member" do
   before do
-    user.member!
+    user.admin!
   end
 
   describe "GET index" do

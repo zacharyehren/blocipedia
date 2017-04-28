@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe WikisController, type: :controller do
-  let(:my_wiki) { Wiki.create!(title: "New Wiki Title", body: "New Wiki Body") }
+  let(:my_wiki) { Wiki.create!(title: Faker::StarWars.quote, body: Faker::StarWars.wookie_sentence) }
+  let(:user) { User.create!(email: "zachehren@example.com", password: "abc123" ) }
+
+context "member" do
+  before do
+    user.member!
+  end
 
   describe "GET index" do
     it "returns http success" do
@@ -114,4 +120,5 @@ RSpec.describe WikisController, type: :controller do
       expect(response).to redirect_to wikis_path
     end
   end
+end
 end

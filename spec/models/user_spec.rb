@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:user) { User.create!(email: "zachehren@example.com", password: "abc123" ) }
 
   describe "attributes" do
     it "responds to role" do
@@ -53,7 +54,7 @@ RSpec.describe User, type: :model do
       end
 
       it "returns false for #premium" do
-        expect(user.premium?).to be_truthy
+        expect(user.premium?).to be_falsey
       end
     end
 
@@ -74,5 +75,5 @@ RSpec.describe User, type: :model do
         expect(user.premium?).to be_truthy
       end
     end
-  end 
+  end
 end

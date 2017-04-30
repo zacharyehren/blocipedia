@@ -17,6 +17,7 @@
       <%= f.text_area :body, class: 'form-control', placeholder: "You will enter wiki body here and you will like it." %>
 
       <%= f.submit "Save", class: 'btn btn-info add-top-space'%>
+      <%= render partial: 'form', locals: { wiki: @wiki } %>
     <% end %>
   </div>
 </div>

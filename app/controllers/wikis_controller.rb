@@ -22,9 +22,6 @@ class WikisController < ApplicationController
     @wiki.private = params[:wiki][:private]
 
     if @wiki.save
-      if @wiki.private?
-        @wiki.title == "#{@wiki.title} (Private Wiki)"
-      end
       flash[:notice] = "Wiki was saved."
       redirect_to @wiki
     else

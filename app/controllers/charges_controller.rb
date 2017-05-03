@@ -21,6 +21,8 @@ class ChargesController < ApplicationController
     )
 
     flash[:notice] = "Thank you for upgrading you membership, #{current_user.email}!"
+    current_user.customer_id = customer.id
+    current_user.save!
     current_user.premium!
     redirect_to '/wikis'
 
@@ -29,20 +31,4 @@ class ChargesController < ApplicationController
     redirect_to new_charge_path
   end
 
-  def edit
-    customer = Stripe::Customer.retrieve({CUSTOMER_ID})
-  end
-
-  def destroy
-    customer = Stripe::Customer.retrieve({CUSTOMER_ID})
-    customer.delete
-    if customer.destroy
-      flash[:notice] = "You have successfully downgraded your account to standard, #{current_user.email}."
-      current_user.standard!
-      redirect_to '/wikis'
-    else
-      flash.now[:alert] = "There was an error updating your account."
-      render :edit
-    end
-  end
 end

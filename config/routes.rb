@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :wikis
 
   resources :charges, only: [:new, :create, :edit, :destroy]
+  resources :users, only: [:edit, :update]
 
 end

@@ -5,8 +5,8 @@ class Wiki < ActiveRecord::Base
   private
 
   def wiki_private
-    if @wiki.private?
-      @wiki.title == "#{@wiki.title} (Private Wiki)"
+    if self.private?
+      self.title == "#{self.title} (Private Wiki)"
     end
   end
 end

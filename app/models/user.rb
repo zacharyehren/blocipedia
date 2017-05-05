@@ -11,9 +11,10 @@ class User < ActiveRecord::Base
   enum role: [:standard, :admin, :premium]
 
   def check_role
-    if self.customer_id != nil
+    if self.customer_id != nil && self.role == :standard
       customer = Stripe::Customer.retrieve(self.customer_id)
       customer.delete
+      self.customer_id = nil
       if self.customer_id == nil
         puts"You have successfully downgraded your account to standard, #{self.email}."
       else

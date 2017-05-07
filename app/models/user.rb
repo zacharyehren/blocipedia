@@ -12,14 +12,15 @@ class User < ActiveRecord::Base
 
   def check_role
     if self.customer_id != nil && self.role == :standard
-      customer = Stripe::Customer.retrieve(self.customer_id)
-      customer.delete
-      self.customer_id = nil
-      if self.customer_id == nil
-        puts"You have successfully downgraded your account to standard, #{self.email}."
-      else
-        puts "There was an error updating your account."
-      end
+      puts "The method made it here"
+      downgrade_wiki
+      # customer = Stripe::Customer.retrieve(self.customer_id)
+      # customer.delete
+      # if self.customer_id == nil
+      #   puts"You have successfully downgraded your account to standard, #{self.email}."
+      # else
+      #   puts "There was an error updating your account."
+      # end
     end
   end
 end

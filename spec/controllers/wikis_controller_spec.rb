@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe WikisController, type: :controller do
-  let(:my_wiki) { Wiki.create!(title: Faker::StarWars.quote, body: Faker::StarWars.wookie_sentence) }
+  let(:my_wiki) { Wiki.create!(title: "Wiki Title", body: "This is the body of the wiki") }
   let(:user) { User.create!(email: "zachehren@example.com", password: "abc123" ) }
 
 context "member" do
   before do
-    sign_in(:user, user)
+    user.confirm
+    sign_in(user)
   end
 
   describe "GET index" do
@@ -40,16 +41,16 @@ context "member" do
 
     describe "POST create" do
       it "increases the number of wikis by 1" do
-        expect( post :create, wiki: {title: "New Wiki Title", body: "New Wiki body"} ).to change(Wiki,:count).by(1)
+        expect { post :create, wiki: {title: "New Wiki Title", body: "New Wiki body"} }.to change(Wiki,:count).by(1)
       end
 
       it "assigns Wiki.last to @wiki" do
-        post( :create, wiki: {title: "New Wiki Title", body: "New Wiki body"} ).to change(Wiki,:count)
+        post :create, wiki: {title: "New Wiki Title", body: "New Wiki body"}
         expect(assigns(:wiki)).to eq Wiki.last
       end
 
       it "redirects to the new wiki" do
-        post( :create, wiki: {title: "New Wiki Title", body: "New Wiki body"} ).to change(Wiki,:count)
+        post :create, wiki: {title: "New Wiki Title", body: "New Wiki body"}
         expect(response).to redirect_to Wiki.last
       end
     end
@@ -86,9 +87,9 @@ context "member" do
       get :edit, {id: my_wiki.id}
       wiki_instance = assigns(:wiki)
 
-      expect(wiki.instance.id).to eq my_instance.id
-      expect(wiki.instance.title).to eq my_instance.title
-      expect(wiki.instance.body).to eq my_instance.body
+      expect(wiki_instance.id).to eq my_wiki.id
+      expect(wiki_instance.title).to eq my_wiki.title
+      expect(wiki_instance.body).to eq my_wiki.body
     end
   end
 
@@ -101,8 +102,8 @@ context "member" do
 
       updated_wiki = assigns(:wiki)
       expect(updated_wiki.id).to eq my_wiki.id
-      expect(updated.wiki.title).to eq new_title
-      expect(updated.wiki.body).to eq new_body
+      expect(updated_wiki.title).to eq new_title
+      expect(updated_wiki.body).to eq new_body
     end
 
     it "redirects to the updated wiki" do

@@ -10,6 +10,7 @@ source 'https://rubygems.org'
 
  group :development do
    gem 'sqlite3'
+   gem 'web-console', '~> 2.0'
  end
 
  gem 'sass-rails', '~> 5.0'
@@ -21,10 +22,13 @@ source 'https://rubygems.org'
  gem 'figaro'
  gem 'devise'
  gem 'pundit'
+ gem 'redcarpet', '~> 3.0.0'
+ gem 'stripe'
+ gem 'simple_form'
+
 
  group :development, :test do
    gem 'byebug'
-   gem 'web-console', '~> 2.0'
    gem 'spring'
    gem 'rspec-rails'
    gem 'shoulda'

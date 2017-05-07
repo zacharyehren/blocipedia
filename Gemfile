@@ -23,6 +23,9 @@ source 'https://rubygems.org'
  gem 'devise'
  gem 'pundit'
  gem 'redcarpet', '~> 3.0.0'
+ gem 'stripe'
+ gem 'simple_form'
+
 
  group :development, :test do
    gem 'byebug'

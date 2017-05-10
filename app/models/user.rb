@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :wikis, dependent: :destroy
-  has_many :collaborators, through: :wikis
+  has_many :collaborators, dependent: :destroy
+  # has_many :wikis, through: :collaborators, as: :wiki_collaborations
 
   after_initialize { self.role ||= :standard }
   before_save :check_role
@@ -25,6 +26,6 @@ class User < ActiveRecord::Base
   end
 
   def add_collaborator
-    
+
   end
 end

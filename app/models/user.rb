@@ -13,15 +13,9 @@ class User < ActiveRecord::Base
   enum role: [:standard, :admin, :premium]
 
   def check_role
-    if self.customer_id != nil && self.role == :standard
-      customer = Stripe::Customer.retrieve(self.customer_id)
-      customer.delete
-      self.customer_id = nil
-      if self.customer_id == nil
-        puts"You have successfully downgraded your account to standard, #{self.email}."
-      else
-        puts "There was an error updating your account."
-      end
+    if self.customer_id != nil && self.standard?
+      puts "The method made it here"
+      self.wikis.where(private: true).update_all(private: false)
     end
   end
 

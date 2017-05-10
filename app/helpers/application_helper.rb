@@ -21,12 +21,4 @@ module ApplicationHelper
 
     markdown.render(text).html_safe
   end
-
-  def downgrade_wiki
-    current_user.wikis.where(private: true).update_all(private: false)
-    # private_wikis = current_user.wikis.where(:private, true)
-    # private_wikis.each do |p|
-    #   p.update_attributes(:private, false)
-    # end
-  end 
 end

@@ -1,12 +1,11 @@
 class Wiki < ActiveRecord::Base
   belongs_to :user
-  before_save :wiki_private
 
-  private
-
-  def wiki_private
+  def title
     if self.private?
-      self.title = "#{self.title} (Private Wiki)"
+      "#{self[:title]} (Private Wiki)"
+    else
+      self[:title]
     end
   end
 end

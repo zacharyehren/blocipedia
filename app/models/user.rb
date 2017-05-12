@@ -18,8 +18,4 @@ class User < ActiveRecord::Base
       self.wikis.where(private: true).update_all(private: false)
     end
   end
-
-  def add_collaborator
-
-  end
 end

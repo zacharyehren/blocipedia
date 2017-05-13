@@ -1,0 +1,7 @@
+<%= form_for [wiki, user] do |f| %>
+<div>
+  <%= f.label :collaborator, class: 'form-control' %>
+    <div>
+      <%= f.collection_select(:collaborator, :user, User.all, :id, :email, {:prompt => true}, {:multiple => true}) %>
+  </div>
+</div>

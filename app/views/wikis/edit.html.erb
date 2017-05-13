@@ -14,6 +14,8 @@
       <li> **This will bold**</li>
       <li> #This will create header text# </li>
       <li><a href="http://www.markdowntutorial.com/" target="_blank">Learn more about markdown here.</a></li>
+    </ul>
+    <%= render partial: 'collaborator_form', locals: { user: @user_id, wiki: @wiki_id } %>
   </div>
     <div class="col-md-8">
     <%= form_for @wiki do |f| %>

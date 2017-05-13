@@ -9,7 +9,4 @@ class Wiki < ActiveRecord::Base
 
   private
 
-  def create_collaborator(email)
-    wiki.users << email.id
-  end
 end

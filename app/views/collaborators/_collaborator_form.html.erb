@@ -1,7 +1,14 @@
-<%= form_for [wiki, user] do |f| %>
-<div>
-  <%= f.label :collaborator, class: 'form-control' %>
-    <div>
-      <%= f.collection_select(:collaborator, :user, User.all, :id, :email, {:prompt => true}, {:multiple => true}) %>
+<% User.all.each do |u| %>
+  <% if !wiki.users.include?(u) %>
+  <div class="row">
+    <%= form_for Collaborator.new do |f| %>
+      <%= f.hidden_field :user_id, value: u.id %>
+      <%= f.hidden_field :wiki_id, value: wiki.id %>
+      <%= u.email %> <%= f.submit 'Make Collaborator', class: "btn btn-success" %>
+    <% end %>
   </div>
-</div>
+  <% else %>
+    <div class="row">
+      <%= wiki.user.email %> <%= link_to "Remove Collaborator", wiki.user.id, method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to remove this Collborator?"} %>
+  <% end %>
+<% end %>

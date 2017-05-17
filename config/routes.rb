@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'collaborators/create'
-
-  get 'collaborators/destroy'
-
   devise_for :users
 
   get "about" => "welcome#about"
@@ -11,6 +7,7 @@ Rails.application.routes.draw do
   root "welcome#index"
 
   resources :wikis
+  resources :collaborators, only: [:create, :destroy]
 
   resources :charges, only: [:new, :create, :edit, :destroy]
   resources :users, only: [:edit, :update]

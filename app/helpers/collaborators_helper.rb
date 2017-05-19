@@ -1,8 +1,7 @@
 module CollaboratorsHelper
 
-  def collaborator_id
-    user_id = params[:collaborator][:user_id]
-    wiki_id = params[:collaborator][:wiki_id]
+  def find_collaborator(user_id, wiki_id)
+    Collaborator.where(user_id: user_id, wiki_id: wiki_id)
   end
 
 end

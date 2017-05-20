@@ -1,1 +1,14 @@
-<h1>Welcome!</h1>
+<div class="jumbotron add-top-space">
+  <h1 class="display-3">
+    Welcome, <%= current_user.email %></h1>
+  <p class="lead">You are now part of the growing Wiki community.</p>
+  <hr class="my-4">
+  <p>Create, read, edit, and change your life.</p>
+  <div>
+    <%= link_to "View Wikis", wikis_path, class: 'btn btn-info' %>
+  </div>
+</div>
+<div class="jeff">
+<img src="http://i.imgur.com/kSPCo9p.png" alt="JG">
+<h3><span style="font-style: italic">"Blocipedia is the best thing in all of the internets. But that will be our little secret." </span> - Jeff Goldblum</h3>
+</div>

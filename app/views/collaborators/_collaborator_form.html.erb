@@ -9,6 +9,6 @@
   </div>
   <% else %>
     <div class="row">
-    <%= find_collaborator(user_id, wiki_id).id %> <%= link_to "Remove Collaborator", find_collaborator(user_id, wiki_id).id, method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to remove this Collborator?"} %>
+    <%= find_collaborator(u.id, wiki.id) %> <%= link_to "Remove Collaborator", find_collaborator(u.id, wiki.id), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to remove this Collborator?"} %>
   <% end %>
 <% end %>

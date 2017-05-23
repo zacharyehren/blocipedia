@@ -6,22 +6,22 @@ class CollaboratorsController < ApplicationController
     collaborator = Collaborator.new(user_id: user_id, wiki_id: wiki_id)
 
     if collaborator.save
-      flash[:notice] = "Collaborator has been saved and now has access to this Wiki."
+      flash[:notice] = "The collaborator has been saved and now has access to this Wiki."
       redirect_to :back
     else
-      flash[:alert] = "Collborator has not been saved. Please try again."
+      flash[:alert] = "The collaborator has not been saved. Please try again."
       redirect_to :back
     end
   end
 
   def destroy
-    collaborator = Collaborator.find(params[:collaborator][:user_id])
+    collaborator = Collaborator.find(params[:id])
 
     if collaborator.destroy
       flash[:notice] = "The collaborator was deleted successfully."
       redirect_to :back
     else
-      flash.now[:alert] = "There was an removing the collaborator."
+      flash.now[:alert] = "There was an error removing the collaborator."
       redirect_to :back
     end
   end

@@ -1,14 +1,11 @@
 class WikisController < ApplicationController
 
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
     @wiki = Wiki.find(params[:id])
-      if @wiki.private?
-        authorize @wiki
-      end
   end
 
   def new
